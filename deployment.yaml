@@ -1,1 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp-container
+          image: nginx:latest   # غير الصورة حسب تطبيقك
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: myapp-config
 
